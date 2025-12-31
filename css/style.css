@@ -574,3 +574,6 @@ canvas {
 	height: 100vh;
 	display: block;
 }
+canvas {
+  transform: translateZ(0);
+}
