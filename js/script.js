@@ -3247,6 +3247,29 @@ const soundManager = {
 // 	}, 0);
 // }
 function startFireworks() {
+	function startFireworks() {
+
+  // Fix mobile black screen
+  setTimeout(() => {
+    window.dispatchEvent(new Event("resize"));
+  }, 100);
+
+  // Nếu có AudioContext
+  if (window.soundManager && soundManager.ctx) {
+    if (soundManager.ctx.state === "suspended") {
+      soundManager.ctx.resume();
+    }
+  }
+
+  // gọi init pháo hoa gốc
+  if (IS_HEADER) {
+    init();
+  } else {
+    var promises = [soundManager.preload(), preloadImages()];
+    Promise.all(promises).then(init, () => init());
+  }
+}
+
 	if (IS_HEADER) {
 		init();
 	} else {
